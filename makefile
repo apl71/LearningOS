@@ -9,13 +9,17 @@ OBJ = ${C_SOURCES:.c=.o}
 all: os-image
 
 # Run bochs to simulate booting of our code .
-run: all
+runb: all
 	bochs -q
+
+runq: all
+	qemu-system-x86_64 os-image
 
 # This is the actual disk image that the computer loads
 # which is the combination of our compiled bootsector and kernel
+# Padding to 10KB to prevent disk read error on qemu
 os-image: boot/boot.bin kernel.bin
-	cat $^ > os-image
+	cat $^ > os-image && truncate -s 10KB os-image
 
 # This builds the binary of our kernel from two object files :
 # - the kernel_entry , which jumps to main () in our kernel
