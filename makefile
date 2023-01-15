@@ -13,7 +13,10 @@ runb: all
 	bochs -q
 
 runq: all
-	qemu-system-x86_64 os-image
+	qemu-system-x86_64 -drive file=os-image,format=raw -no-reboot -d int,pcall,cpu_reset
+
+rund: all
+	qemu-system-x86_64 -drive file=os-image,format=raw -s -S -no-reboot -d int,pcall,cpu_reset
 
 # This is the actual disk image that the computer loads
 # which is the combination of our compiled bootsector and kernel
