@@ -9,8 +9,8 @@
 #define GREEN_ON_BLACK  0x02
 
 // 显示设备的IO接口
-#define REG_SCREEN_CTRL 0x3D4
-#define REG_SCREEN_DATA 0x3D5
+#define REG_SCREEN_CTRL 0x3d4
+#define REG_SCREEN_DATA 0x3d5
 
 // 显示设备接口函数
 
