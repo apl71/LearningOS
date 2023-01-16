@@ -21,8 +21,8 @@ db (%1 >> 24) & 0xff                    ; 段基址2 1字节
 %endmacro
 
 ; 根据平面存储模式的属性构造两个常量值
-; 代码段属性 0 0 0 0 G=1 D/B=1 L=0 AVL=0 P=1 DPL=00 S=1 TYPE=1010
-; 数据段属性 0 0 0 0 G=1 D/B=1 L=0 AVL=0 P=1 DPL=00 S=1 TYPE=0010
+; 代码段属性 G=1 D/B=1 L=0 AVL=0 0 0 0 0 P=1 DPL=00 S=1 TYPE=1010
+; 数据段属性 G=1 D/B=1 L=0 AVL=0 0 0 0 0 P=1 DPL=00 S=1 TYPE=0010
 FLAT_MODE_CODE_PROPERTY  equ  0xc09a
 FLAT_MODE_DATA_PROPERTY  equ  0xc092
 
