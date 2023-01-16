@@ -18,7 +18,7 @@
 void print_char_at(char character, int col, int row, char attr);
 
 // 在指定位置打印字符串，默认黑底白字
-void print_string_at(char *message, int col, int row, char attr);
+void print_string_at(char message[], int col, int row, char attr);
 
 // 用行列号计算出偏移量
 int get_screen_offset(int col, int row);
