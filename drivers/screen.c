@@ -15,12 +15,10 @@ void print_char_at(char character, int col, int row, char attr) {
     vidmem[offset++] = attr;
 }
 
-void print_string_at(char *message, int col, int row, char attr) {
+void print_string_at(char message[], int col, int row, char attr) {
     int count = 0;
     while (message[count] != 0x00) {
-        print_char_at(message[count], col, row, attr);
-        count++;
-        col++;
+        print_char_at(message[count++], col++, row, attr);
         if (col >= MAX_COLS) {
             col = 0;
             row++;
@@ -57,4 +55,5 @@ void clear_screen() {
             print_char_at(' ', col, row, 0);
         }
     }
+    set_cursor(get_screen_offset(0, 0));
 }
