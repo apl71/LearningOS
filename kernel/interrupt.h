@@ -18,7 +18,7 @@ typedef struct {
     uint16_t isr_high;
 } __attribute__((packed)) idt_entry_t;
 
-// 定义GDT
+// 定义IDT
 __attribute__((aligned(0x10)))
 static idt_entry_t idt[IDT_MAX_DESCRIPTORS];
 
@@ -32,14 +32,15 @@ typedef struct {
 static idtr_t idtr;
 
 // 通用异常处理函数
-__attribute((noreturn))
-void exception_handler(void);
+__attribute__((noreturn))
+void exception_handler();
 
 // 写入IDT表项，iv是中断向量，handler表示处理程序地址
 void set_idt(int iv, ADDRESS_32 handler);
 
-// 初始化IDT
+// isr表项，isr[iv]表示中断向量iv要用到的isr地址
 extern void *isr_stub_table[];
+// 初始化IDT
 void idt_init();
 
 #endif

@@ -1,10 +1,5 @@
 #include "interrupt.h"
 
-void exception_handler(void) {
-    __asm__ volatile ("cli");
-    __asm__ volatile ("hlt");
-}
-
 void set_idt(int iv, ADDRESS_32 handler) {
     if (iv >= 255 || iv <= 0) {
         return;
@@ -28,4 +23,8 @@ void idt_init() {
     // 加载idtr
     __asm__ volatile ("lidt %0" : : "m"(idtr));
     __asm__ volatile ("sti");   // 启动中断
+}
+
+void exception_handler() {
+    __asm__ volatile ("cli; hlt");
 }
