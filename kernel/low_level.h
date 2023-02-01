@@ -15,4 +15,7 @@ unsigned short port_word_in(unsigned short port);
 // 向接口输出一个字
 void port_word_out(unsigned short port, unsigned short data);
 
+// 用于老旧机器上等待PIC重初始化等的简单等待操作
+void io_wait();
+
 #endif
