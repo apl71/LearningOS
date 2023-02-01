@@ -57,3 +57,15 @@ isr_stub_table:
     dd isr_stub_%+i
 %assign i i+1 
 %endrep
+
+; 两步汇编封装
+global isr_wrapper
+align 4
+
+[extern interrupt_handler]
+isr_wrapper:
+    pushad
+    cld
+    call interrupt_handler
+    popad
+    iret
