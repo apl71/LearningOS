@@ -13,11 +13,6 @@ int kernel_main() {
     // 初始化IDT
     print_string(idt_init_msg, WHITE_ON_BLACK);
     idt_init();
-    
-    // 测试中断
-    // __asm__ volatile ("int $0x21");
-    // __asm__ volatile ("int $0x21");
-    // __asm__ volatile ("int $0x21");
 
     for(;;) {
         asm("hlt");
