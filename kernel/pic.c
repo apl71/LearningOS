@@ -95,9 +95,12 @@ IRQ pic_get_isr() {
 }
 
 void pic_init() {
+    // 关闭PIC
+    irq_set_all_mask();
+
     // 重映射PIC
     print_string(pic_remap_msg, WHITE_ON_BLACK);
-    pic_remap(0x20, 0x28);
+    pic_remap(PIC1_VECTOR_OFFSET, PIC2_VECTOR_OFFSET);
     print_string(ok_msg, GREEN_ON_BLACK);
 
     // 重置PIC掩码

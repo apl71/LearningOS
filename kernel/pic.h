@@ -32,6 +32,10 @@
 // 定义IRQ编号类型
 #define IRQ unsigned char
 
+// 定义中断偏移量vector offset
+#define PIC1_VECTOR_OFFSET  0x20
+#define PIC2_VECTOR_OFFSET  0x28
+
 // 向PIC发送结束中断控制信号
 void pic_send_eoi(IRQ irq);
 
