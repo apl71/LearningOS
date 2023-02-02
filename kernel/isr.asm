@@ -59,13 +59,13 @@ isr_stub_table:
 %endrep
 
 ; 两步汇编封装
-global isr_wrapper
-align 4
+; global isr_wrapper
+; align 4
 
-[extern interrupt_handler]
-isr_wrapper:
-    pushad
-    cld
-    call interrupt_handler
-    popad
-    iret
+; [extern interrupt_handler]
+; isr_wrapper:
+;     pushad
+;     cld
+;     call interrupt_handler
+;     popad
+;     iret

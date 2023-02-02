@@ -48,6 +48,6 @@ extern void *isr_stub_table[];
 // 初始化IDT
 void idt_init();
 
-extern void interrupt_handler();
+extern void keyboard_handler();
 
 #endif

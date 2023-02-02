@@ -3,6 +3,7 @@
 #include "../drivers/screen.h"
 #include "low_level.h"
 #include "const.h"
+#include "../drivers/keyboard.h"
 
 void set_idt(int iv, ADDRESS_32 handler, uint8_t flag) {
     if (iv >= 255 || iv <= 0) {
@@ -27,9 +28,9 @@ void idt_init() {
     }
     print_string(ok_msg, GREEN_ON_BLACK);
 
-    // 注册33号中断向量，isr为interrupt_handler()
+    // 注册33号中断向量（键盘中断），isr为keyboard_handler()
     print_string(set_idt_33_msg, WHITE_ON_BLACK);
-    set_idt(0x21, (ADDRESS_32)interrupt_handler, INTERRUPT_GATE);
+    set_idt(0x21, (ADDRESS_32)keyboard_handler, INTERRUPT_GATE);
     print_string(ok_msg, GREEN_ON_BLACK);
 
     // 加载idtr
@@ -39,11 +40,9 @@ void idt_init() {
     print_string(ok_msg, GREEN_ON_BLACK);
 }
 
-void interrupt_handler() {
-    char message[] = "interrupt_handler() called.\n";
-    print_string(message, WHITE_ON_BLACK);
-
+__attribute__((interrupt)) void keyboard_handler(struct interrupt_frame *frame) {
     uint8_t scancode = port_byte_in(0x60);
+    print_scancode(scancode);
 
     pic_send_eoi(1);
 }
