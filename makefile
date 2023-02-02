@@ -33,7 +33,7 @@ kernel.bin: kernel/kernel_entry.o kernel/isr.o kernel/pic.o ${OBJ}
 # Generic rule for compiling C code to an object file
 # For simplicity , we C files depend on all header files .
 %.o: %.c ${HEADERS}
-	${CC} -ffreestanding -ggdb -O0 -c $< -o $@
+	${CC} -ffreestanding -ggdb -O0 -mgeneral-regs-only -c $< -o $@
 
 # Assemble the kernel_entry .
 %.o: %.asm
