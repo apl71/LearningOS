@@ -2,9 +2,9 @@
 C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
 HEADERS = $(wildcard kernel/*.h drivers/*.h)
 
-CC = ${HOME}/opt/cross/bin/i686-elf-gcc
+CC = ${HOME}/opt/cross-i686/bin/i686-elf-gcc
 AS = nasm
-LD = ${HOME}/opt/cross/bin/i686-elf-ld
+LD = ${HOME}/opt/cross-i686/bin/i686-elf-ld
 
 # Convert the *. c filenames to *. o to give a list of object files to build
 OBJ = ${C_SOURCES:.c=.o}
