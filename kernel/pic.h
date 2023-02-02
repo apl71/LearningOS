@@ -33,24 +33,31 @@
 #define IRQ unsigned char
 
 // 向PIC发送结束中断控制信号
-void PIC_send_EOI(IRQ irq);
+void pic_send_eoi(IRQ irq);
 
 // 重新初始化保护模式下的PIC，参数分别为主从PIC的偏移量
-void PIC_remap(int offset1, int offset2);
+void pic_remap(int offset1, int offset2);
 
 // 设置IMR
-void IRQ_set_mask(IRQ irq);
+void irq_set_mask(IRQ irq);
+// 将所有位置为1
+void irq_set_all_mask();
 
 // 复位IMR
-void IRQ_clear_mask(IRQ irq);
+void irq_clear_mask(IRQ irq);
+// 将所有位复位
+void irq_clear_all_mask();
 
 // 读取PIC内部寄存器的值
-IRQ PIC_get_irq_reg(uint8_t ocw3);
+IRQ pic_get_irq_reg(uint8_t ocw3);
 
 // 读取IRR
-IRQ PIC_get_irr();
+IRQ pic_get_irr();
 
 // 读取ISR
-IRQ PIC_get_isr();
+IRQ pic_get_isr();
+
+// 初始化PIC
+void pic_init();
 
 #endif
