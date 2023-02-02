@@ -14,13 +14,6 @@
 #define TRAP_GATE               0x8f
 #define TASK_GATE               0x85
 
-// 提示信息
-static const char pic_remap_msg[]  = "Remapping pic.\n";
-static const char exception_msg[]  = "Loading ISRs for exceptions.\n";
-static const char set_idt_33_msg[] = "Loading ISR for interrupt vector 33.\n";
-static const char clear_mask_msg[] = "Clearing mask for IRQ 1.\n";
-static const char load_idtr_msg[]  = "Loading IDTR.\n";
-
 // IDT表项
 typedef struct {
     uint16_t isr_low;
