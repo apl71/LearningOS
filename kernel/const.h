@@ -12,6 +12,8 @@
 // static char pic_remap_msg[]  = "Remapping pic.";
 // static char clear_mask_msg[] = "Clearing mask for IRQ 1.";
 
+#define new_line        "\n"
+
 #define ok_msg          "[Done]\n"
 
 #define os_hello_msg    "Welcome to my OS.\n"
@@ -22,5 +24,7 @@
 #define load_idtr_msg   "Loading IDTR and enabling hardware interrupt. "
 #define pic_remap_msg   "Remapping pic. "
 #define clear_mask_msg  "Clearing mask for IRQ 1. "
+#define detect_mem_msg  "Detecting memory.\n"
+#define low_mem_msg     "Low memory in KB: "
 
 #endif
