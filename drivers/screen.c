@@ -107,3 +107,29 @@ int handle_scrolling(int cursor_offset) {
     cursor_offset = get_screen_offset(0, MAX_ROWS - 1);
     return cursor_offset;
 }
+
+void print_int(int32_t num, int radix, char attr) {
+    if (num < 0) {
+        // 打印负号，并转换为正数处理
+        print_string("-", attr);
+        num = -num;
+    }
+    // 保存数字的字符串形式，32位任何进制整数不会超过32个字符（加上\0）
+    char num_str[33];
+    memory_set(num_str, 0, 33);
+    // 获取数字位数
+    int count = len_nums(num, radix);
+    // 从后向前输出到字符串中
+    for (int i = count - 1; i >= 0; --i) {
+        char code = num % radix;
+        if (code < 10) {
+            code += '0';
+        } else {
+            code -= 10;
+            code += 'a';
+        }
+        num_str[i] = code;
+        num /= radix;
+    }
+    print_string(num_str, attr);
+}

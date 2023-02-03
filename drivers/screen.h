@@ -1,6 +1,8 @@
 #ifndef SCREEN_H_
 #define SCREEN_H_
 
+#include <stdint.h>
+
 #define VIDEO_ADDRESS   (unsigned char *)0xb8000    // 显示存储在主存中映射的地址
 #define MAX_ROWS        25                          // 行数
 #define MAX_COLS        80                          // 列数
@@ -57,5 +59,8 @@ void clear_screen();
 
 // 处理屏幕滚动
 int handle_scrolling(int cursor_offset);
+
+// 打印整数，不超过32位，最高支持36进制
+void print_int(int32_t num, int radix, char attr);
 
 #endif
