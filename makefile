@@ -27,7 +27,7 @@ os-image: boot/boot.bin kernel.bin
 # This builds the binary of our kernel from two object files :
 # - the kernel_entry , which jumps to main () in our kernel
 # - the compiled C kernel
-kernel.bin: kernel/kernel_entry.o kernel/isr.o kernel/pic.o ${OBJ}
+kernel.bin: kernel/kernel_entry.o kernel/isr.o kernel/pic.o kernel/memory.o ${OBJ}
 	${LD} -o $@ -Ttext 0x1000 $^ --oformat binary
 
 # Generic rule for compiling C code to an object file
