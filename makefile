@@ -13,10 +13,10 @@ OBJ = ${C_SOURCES:.c=.o}
 all: os-image
 
 run: all
-	qemu-system-i386 -drive file=os-image,format=raw -no-reboot
+	qemu-system-i386 -m 512 -drive file=os-image,format=raw -no-reboot
 
 debug: all
-	qemu-system-i386 -drive file=os-image,format=raw -s -S -no-reboot -d int,pcall,cpu_reset
+	qemu-system-i386 -m 512 -drive file=os-image,format=raw -s -S -no-reboot -d int,pcall,cpu_reset
 
 # This is the actual disk image that the computer loads
 # which is the combination of our compiled bootsector and kernel

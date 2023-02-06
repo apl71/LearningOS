@@ -5,7 +5,7 @@
 #include "memory.h"
 
 int kernel_main() {
-    // clear screen and print banner
+    // 清空屏幕并打印欢迎语句
     clear_screen();
     print_string(os_hello_msg, WHITE_ON_BLACK);
     // 初始化PIC
@@ -16,12 +16,9 @@ int kernel_main() {
     idt_init();
     // 探测主存
     print_string(detect_mem_msg, WHITE_ON_BLACK);
-    print_string(low_mem_msg, WHITE_ON_BLACK);
-    uint32_t low_memory = get_low_memory();
-    print_int(low_memory, 10, WHITE_ON_BLACK);
-    print_string(new_line, WHITE_ON_BLACK);
+    init_memory_layout_table();
 
     for(;;) {
-        asm("hlt");
+        __asm__ ("hlt");
     }
 }

@@ -1,7 +1,10 @@
 #include "memory.h"
 
-uint32_t get_low_memory() {
-    uint32_t result;
-    __asm__("int $0x12" : "=a" (result));
-    return result;
+void init_memory_layout_table() {
+    __asm__ ("mov mlt, %%es:di" : "mlt" (&memory_layout_table));
+    __asm__ ("xor %%ebx, %%ebx");
+    __asm__ ("mov $0x534d4150, %%edx");
+    __asm__ ("mov $0x0000e820, %%eax");
+    __asm__ ("mov $0x00000018, %%ecx");
+    __asm__ ("int $0x15");
 }
