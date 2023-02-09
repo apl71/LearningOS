@@ -1,6 +1,6 @@
 *.bin
 *.dis
 *.o
-os-image
+disk.img
 .vscode/
 log
