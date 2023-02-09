@@ -8,12 +8,12 @@
 [org 0x7c00]
 
 ; 定义内核地址，该地址在链接内核时也要指定，使内核程序的地址偏移量与此一致
-; ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary
-KERNEL_OFFSET equ 0x1000
+; ld -o kernel.bin -Ttext 0x500 kernel.o --oformat binary
+KERNEL_OFFSET equ 0x500
 
 mov [BOOT_DRIVE], dl            ; BIOS将启动盘的盘号放在dl中，我们保存下来
 
-mov bp, 0x9000                  ; 设置实模式下的栈
+mov bp, 0x9000                  ; 设置保护模式下的栈
 mov sp, bp
 
 mov bx, MSG_REAL_MODE           ; 打印提示信息
@@ -21,15 +21,22 @@ call print_string
 
 call load_kernel                ; 加载内核到主存中
 
-call switch_to_pm               ; 进入实模式，不会从实模式返回
+call init_mmap                  ; 探测主存
+
+mov bp, 0x9000                  ; 重新设置保护模式下的栈
+mov sp, bp
+
+call switch_to_pm               ; 进入保护模式，不会从保护模式返回
 
 jmp $
 
 %include "io.asm"
 %include "switch_to_pm.asm"
 %include "gdt.asm"
+%include "memory_detect.asm"
 
 [bits 16]
+
 ; 把内核代码加载到内存中
 load_kernel:
     mov bx, MSG_LOAD_KERNEL
