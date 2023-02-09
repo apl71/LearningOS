@@ -10,25 +10,27 @@ LD = ${HOME}/opt/cross-i686/bin/i686-elf-ld
 OBJ = ${C_SOURCES:.c=.o}
 
 # Default build target
-all: os-image
+all: disk.img
 
 run: all
-	qemu-system-i386 -m 512 -drive file=os-image,format=raw -no-reboot
+	qemu-system-i386 -m 512 -drive file=disk.img,format=raw -no-reboot
 
 debug: all
-	qemu-system-i386 -m 512 -drive file=os-image,format=raw -s -S -no-reboot -d int,pcall,cpu_reset
+	qemu-system-i386 -m 512 -drive file=disk.img,format=raw -s -S -no-reboot -d int,pcall,cpu_reset
 
 # This is the actual disk image that the computer loads
 # which is the combination of our compiled bootsector and kernel
-# Padding to 10KB to prevent disk read error on qemu
-os-image: boot/boot.bin kernel.bin
-	cat $^ > os-image && truncate -s 10KB os-image
+disk.img: boot/boot.bin kernel.bin
+	dd if=/dev/zero of=$@ bs=1024 count=1440 && \
+	dd if=$< of=$@ conv=notrunc && \
+	dd if=$(word 2,$^) of=$@ bs=512 seek=1 conv=notrunc
+# cat $^ > os-image && truncate -s 10KB os-image
 
 # This builds the binary of our kernel from two object files :
 # - the kernel_entry , which jumps to main () in our kernel
 # - the compiled C kernel
 kernel.bin: kernel/kernel_entry.o kernel/isr.o kernel/pic.o kernel/memory.o ${OBJ}
-	${LD} -o $@ -Ttext 0x1000 $^ --oformat binary
+	${LD} -o $@ -Ttext 0x500 $^ --oformat binary
 
 # Generic rule for compiling C code to an object file
 # For simplicity , we C files depend on all header files .
@@ -43,5 +45,5 @@ kernel.bin: kernel/kernel_entry.o kernel/isr.o kernel/pic.o kernel/memory.o ${OB
 	${AS} $< -f bin -I './boot/' -o $@
 
 clean:
-	rm -fr *.bin *.dis *.o os-image
+	rm -fr *.bin *.dis *.o disk.img
 	rm -fr kernel/*.o boot/*.bin drivers/*.o
