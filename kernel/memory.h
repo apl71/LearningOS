@@ -3,21 +3,20 @@
 
 #include <stdint.h>
 
-// 主存布局表的长度
-#define MLT_LENGTH 32
-
 // 主存布局表项的结构体
 typedef struct  {
     uint64_t base_address;
     uint64_t length;
     uint32_t type;
     uint32_t acpi3;
-} __attribute__((packed)) memory_layout_entry;
+} __attribute__((packed)) mmap_entry;
 
-// 定义主存布局表
-memory_layout_entry memory_layout_table[MLT_LENGTH];
+// mmap表项的长度
+extern uint32_t mmap_length;
+// 指向mmap表的指针
+extern mmap_entry *mmap;
 
-// 初始化主存布局
-void init_memory_layout_table();
+// 初始化mmap_length和mmap
+void init_mmap_info();
 
 #endif

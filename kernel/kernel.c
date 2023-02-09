@@ -14,10 +14,12 @@ int kernel_main() {
     // 初始化IDT
     print_string(idt_init_msg, WHITE_ON_BLACK);
     idt_init();
-    // 探测主存
-    print_string(detect_mem_msg, WHITE_ON_BLACK);
-    init_memory_layout_table();
-
+    // 获取mmap
+    init_mmap_info();
+    // 打印主存信息
+    print_string(mmap_length_msg, WHITE_ON_BLACK);
+    print_int(mmap_length, 10, WHITE_ON_BLACK);
+    
     for(;;) {
         __asm__ ("hlt");
     }
