@@ -21,6 +21,7 @@ init_mmap:
 mmap_loop:
     mov eax, 0xe820             ; magic number
     mov ecx, 24                 ; 请求长为24字节的项
+;    mov [es:di + 20], dword 1   ; 强制要求apci项
     int 0x15
     cmp eax, 0x534d4150         ; eax不为0x534d4150时报错
     jne fail_init_mmap
@@ -28,12 +29,7 @@ mmap_loop:
     inc bp
     cmp ebx, 0                  ; ebx为0则结束探测
     je mmap_finish
-    cmp cl, 20                  ; 将写入地址加上字节数
-    jne mmap_24
-    add di, 20
-    jmp mmap_loop
-mmap_24:
-    add di, 24
+    add di, 24                  ; 跳转到下一项
     jmp mmap_loop
 mmap_finish:
     mov [mmap_entry], bp
