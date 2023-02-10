@@ -60,7 +60,9 @@ void clear_screen();
 // 处理屏幕滚动
 int handle_scrolling(int cursor_offset);
 
-// 打印整数，不超过32位，最高支持36进制
-void print_int(int32_t num, int radix, char attr);
+// 打印整数，不超过32位，最高支持36进制。length为打印位数，0表示使用可能的最短位数
+void print_int(int32_t num, int radix, int length, char attr);
+
+void print_uint(uint32_t num, int radix, int length, char attr);
 
 #endif
