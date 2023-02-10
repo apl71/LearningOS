@@ -12,7 +12,19 @@ void memory_set(char *mem, char value, int length) {
     }
 }
 
-int len_nums(int32_t num, int radix) {
+int len_int(int32_t num, int radix) {
+    if (num == 0) {
+        return 1;
+    }
+    int count = 0;
+    while (num != 0) {
+        count++;
+        num /= radix;
+    }
+    return count;
+}
+
+int len_uint(uint32_t num, int radix) {
     if (num == 0) {
         return 1;
     }
