@@ -99,13 +99,13 @@ void pic_init() {
     irq_set_all_mask();
 
     // 重映射PIC
-    print_string(pic_remap_msg, WHITE_ON_BLACK);
+    print_string(MSG_PIC_REMAP, WHITE_ON_BLACK);
     pic_remap(PIC1_VECTOR_OFFSET, PIC2_VECTOR_OFFSET);
-    print_string(ok_msg, GREEN_ON_BLACK);
+    print_string(MSG_OK, GREEN_ON_BLACK);
 
     // 重置PIC掩码
-    print_string(clear_mask_msg, WHITE_ON_BLACK);
+    print_string(MSG_CLEAR_MASK, WHITE_ON_BLACK);
     irq_set_all_mask();
     irq_clear_mask(1);
-    print_string(ok_msg, GREEN_ON_BLACK);
+    print_string(MSG_OK, GREEN_ON_BLACK);
 }

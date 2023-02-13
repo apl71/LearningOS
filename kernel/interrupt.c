@@ -22,22 +22,22 @@ void idt_init() {
     idtr.limit = IDT_MAX_DESCRIPTORS * sizeof(idt_entry_t) - 1;
 
     // 初始化异常部分
-    print_string(exception_msg, WHITE_ON_BLACK);
+    print_string(MSG_EXCEPTION, WHITE_ON_BLACK);
     for (uint8_t vector = 0; vector < 32; ++vector) {
         set_idt(vector, (ADDRESS_32)isr_stub_table[vector], INTERRUPT_GATE);
     }
-    print_string(ok_msg, GREEN_ON_BLACK);
+    print_string(MSG_OK, GREEN_ON_BLACK);
 
     // 注册33号中断向量（键盘中断），isr为keyboard_handler()
-    print_string(set_idt_33_msg, WHITE_ON_BLACK);
+    print_string(MSG_SET_IDT_33, WHITE_ON_BLACK);
     set_idt(0x21, (ADDRESS_32)keyboard_handler, INTERRUPT_GATE);
-    print_string(ok_msg, GREEN_ON_BLACK);
+    print_string(MSG_OK, GREEN_ON_BLACK);
 
     // 加载idtr
-    print_string(load_idtr_msg, WHITE_ON_BLACK);
+    print_string(MSG_LOAD_IDTR, WHITE_ON_BLACK);
     __asm__ volatile ("lidt %0" : : "m"(idtr));
     __asm__ volatile ("sti");   // 启动中断
-    print_string(ok_msg, GREEN_ON_BLACK);
+    print_string(MSG_OK, GREEN_ON_BLACK);
 }
 
 __attribute__((interrupt)) void keyboard_handler(struct interrupt_frame *frame) {
