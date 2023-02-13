@@ -57,6 +57,7 @@ int kernel_main() {
     // 打印可用主存大小
     print_string(mem_size_msg, WHITE_ON_BLACK);
     print_uint(memory_size, 10, 0, WHITE_ON_BLACK);
+    print_string(new_line, WHITE_ON_BLACK);
     
     for(;;) {
         __asm__ ("hlt");
