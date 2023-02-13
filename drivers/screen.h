@@ -45,6 +45,9 @@ void print_string_at(char message[], int col, int row, char attr);
 // 在光标处打印字符串
 void print_string(char message[], char attr);
 
+// 换行
+void print_newline();
+
 // 用行列号计算出偏移量
 int get_screen_offset(int col, int row);
 

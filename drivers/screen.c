@@ -1,6 +1,7 @@
 #include "screen.h"
 #include "../kernel/low_level.h"
 #include "../kernel/util.h"
+#include "../kernel/const.h"
 
 void print_char_at(char character, int col, int row, char attr) {
     // 获取显示设备映射主存的首地址
@@ -51,6 +52,10 @@ void print_string_at(char message[], int col, int row, char attr) {
 
 void print_string(char message[], char attr) {
     print_string_at(message, -1, -1, attr);
+}
+
+void print_newline() {
+    print_string(MSG_NEWLINE, WHITE_ON_BLACK);
 }
 
 int get_screen_offset(int col, int row) {

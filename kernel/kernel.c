@@ -19,7 +19,7 @@ int kernel_main() {
     // 打印主存信息
     print_string(MSG_MMAP_LENGTH, WHITE_ON_BLACK);
     print_int(mmap_length, 10, 0, WHITE_ON_BLACK);
-    print_string(MSG_NEWLINE, WHITE_ON_BLACK);
+    print_newline();
     print_string(MSG_MMAP_TITLE, WHITE_ON_BLACK);
     // 主存大小，单位为字节
     uint32_t memory_size = 0;
@@ -48,7 +48,7 @@ int kernel_main() {
             print_string("Unsupported.", WHITE_ON_BLACK);
         }
         // 换行
-        print_string(MSG_NEWLINE, WHITE_ON_BLACK);
+        print_newline();
         // 统计可用主存空间
         if (mmap[i].type == 1 || mmap[i].type == 3) {
             memory_size += mmap[i].length;
