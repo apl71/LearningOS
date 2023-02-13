@@ -43,9 +43,9 @@ int kernel_main() {
         }
         // 打印apci支持
         if (mmap[i].acpi3 & 0x01 == 0x01) {
-            print_string("Supported.", WHITE_ON_BLACK);
+            print_string(MSG_ACPI_OK, WHITE_ON_BLACK);
         } else {
-            print_string("Unsupported.", WHITE_ON_BLACK);
+            print_string(MSG_ACPI_MISS, WHITE_ON_BLACK);
         }
         // 换行
         print_newline();

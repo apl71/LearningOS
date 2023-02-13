@@ -24,5 +24,7 @@
 #define MSG_BAD_MEM         "5: Area containing bad memory " 
 #define MSG_UNKNOWN_MEM     "Unknown memory type                "
 #define MSG_MEM_SIZE        "Usable memory size in bytes: "
+#define MSG_ACPI_OK         "Supported."
+#define MSG_ACPI_MISS       "Unsupported."
 
 #endif
